@@ -59,156 +59,179 @@ public class TestLoja {
 
 	@Test
 	public void lojaCompleta() {
-		Loja lojaCompleta = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP,
-				TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja lojaCompleta = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO,
+				CNPJ, INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_LOJA_COMPLETA, lojaCompleta);
 	}
 
 	@Test
 	public void validarNome() {
-		Loja nomeVazio = new Loja("", LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja nomeVazio = new Loja("", new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP),
+				TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo nome da loja é obrigatório", nomeVazio);
 
-		Loja nomeNulo = new Loja(null, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja nomeNulo = new Loja(null, new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP),
+				TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo nome da loja é obrigatório", nomeNulo);
 	}
 
 	@Test
 	public void validarLogradouro() {
-		Loja logradouroVazio = new Loja(NOME_LOJA, "", NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja logradouroVazio = new Loja(NOME_LOJA,
+				new Endereco("", NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo logradouro do endereço é obrigatório", logradouroVazio);
 
-		Loja logradouroNulo = new Loja(NOME_LOJA, null, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja logradouroNulo = new Loja(NOME_LOJA,
+				new Endereco(null, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo logradouro do endereço é obrigatório", logradouroNulo);
 	}
 
 	@Test
 	public void validarNumero() {
-		Loja numeroZero = new Loja(NOME_LOJA, LOGRADOURO, 0, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja numeroZero = new Loja(NOME_LOJA, new Endereco(LOGRADOURO, 0, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP),
+				TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_NUMERO, numeroZero);
 
 		// Não compila porque a tipagem não permite esse erro
-		// Loja numeroNulo = new Loja(NOME_LOJA, LOGRADOURO, null, COMPLEMENTO, BAIRRO,
-		// MUNICIPIO, ESTADO, CEP, TELEFONE,
+		// Loja numeroNulo = new Loja(NOME_LOJA,
+		// new Endereco(LOGRADOURO, null, COMPLEMENTO, BAIRRO,
+		// MUNICIPIO, ESTADO, CEP), TELEFONE,
 		// OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
 		// rodarTestarRetorno(TEXTO_ESPERADO_SEM_NUMERO, numeroNulo);
 	}
 
 	@Test
 	public void validarComplemento() {
-		Loja complementoVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, "", BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja complementoVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, "", BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_COMPLEMENTO, complementoVazio);
 
-		Loja complementoNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, null, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja complementoNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, null, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_COMPLEMENTO, complementoNulo);
 	}
 
 	@Test
 	public void validarBairro() {
-		Loja bairroVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, "", MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja bairroVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, "", MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_BAIRRO, bairroVazio);
 
-		Loja bairroNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, null, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja bairroNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, null, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_BAIRRO, bairroNulo);
 	}
 
 	@Test
 	public void validarMunicipio() {
-		Loja municipioVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, "", ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja municipioVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, "", ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo município do endereço é obrigatório", municipioVazio);
 
-		Loja municipioNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, null, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja municipioNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, null, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo município do endereço é obrigatório", municipioNulo);
 	}
 
 	@Test
 	public void validarEstado() {
-		Loja estadoVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, "", CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja estadoVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, "", CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo estado do endereço é obrigatório", estadoVazio);
 
-		Loja estadoNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, null, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja estadoNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, null, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo estado do endereço é obrigatório", estadoNulo);
 	}
 
 	@Test
 	public void validarCep() {
-		Loja cepVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, "", TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja cepVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, ""), TELEFONE, OBSERVACAO,
+				CNPJ, INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_CEP, cepVazio);
 
-		Loja cepNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, null, TELEFONE,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja cepNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, null), TELEFONE, OBSERVACAO,
+				CNPJ, INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_CEP, cepNulo);
 	}
 
 	@Test
 	public void validarTelefone() {
-		Loja telefoneVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, "",
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja telefoneVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), "", OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_TELEFONE, telefoneVazio);
 
-		Loja telefoneNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, null,
-				OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja telefoneNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), null, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_TELEFONE, telefoneNulo);
 	}
 
 	@Test
 	public void validarObservacao() {
-		Loja observacaoVazia = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP,
-				TELEFONE, "", CNPJ, INSCRICAO_ESTADUAL);
+		Loja observacaoVazia = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, "", CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_OBSERVACAO, observacaoVazia);
 
-		Loja observacaoNula = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP,
-				TELEFONE, null, CNPJ, INSCRICAO_ESTADUAL);
+		Loja observacaoNula = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, null, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_OBSERVACAO, observacaoNula);
 	}
 
 	@Test
 	public void validarCnpj() {
-		Loja cnpjVazio = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, "", INSCRICAO_ESTADUAL);
+		Loja cnpjVazio = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, "",
+				INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo cnpj da loja é obrigatório", cnpjVazio);
 
-		Loja cnpjNulo = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, null, INSCRICAO_ESTADUAL);
+		Loja cnpjNulo = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO,
+				null, INSCRICAO_ESTADUAL);
 		verificarCampoObrigatorio("O campo cnpj da loja é obrigatório", cnpjNulo);
 	}
 
 	@Test
 	public void validarInscricaoEstadual() {
-		Loja ieVazia = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, "");
+		Loja ieVazia = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO,
+				CNPJ, "");
 		verificarCampoObrigatorio("O campo inscrição estadual da loja é obrigatório", ieVazia);
 
-		Loja ieNula = new Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE,
-				OBSERVACAO, CNPJ, "");
+		Loja ieNula = new Loja(NOME_LOJA, new Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO, ESTADO, CEP),
+				TELEFONE, OBSERVACAO, CNPJ, "");
 		verificarCampoObrigatorio("O campo inscrição estadual da loja é obrigatório", ieNula);
 	}
 
 	@Test
 	public void validarNumeroComplemento() {
-		Loja semNumeroSemComplemento = new Loja(NOME_LOJA, LOGRADOURO, 0, null, BAIRRO, MUNICIPIO, ESTADO, CEP,
-				TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja semNumeroSemComplemento = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, 0, null, BAIRRO, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO, semNumeroSemComplemento);
 	}
 
 	@Test
 	public void validarNumeroComplementoBairro() {
-		Loja semNumeroSemComplementoBairro = new Loja(NOME_LOJA, LOGRADOURO, 0, null, null, MUNICIPIO, ESTADO, CEP,
-				TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+		Loja semNumeroSemComplementoBairro = new Loja(NOME_LOJA,
+				new Endereco(LOGRADOURO, 0, null, null, MUNICIPIO, ESTADO, CEP), TELEFONE, OBSERVACAO, CNPJ,
+				INSCRICAO_ESTADUAL);
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO, semNumeroSemComplementoBairro);
 	}
 
@@ -228,8 +251,9 @@ public class TestLoja {
 		String cnpj = "";
 		String inscricaoEstadual = "";
 
-		Loja lojaCustomizada = new Loja(nomeLoja, logradouro, numero, complemento, bairro, municipio, estado, cep,
-				telefone, observacao, cnpj, inscricaoEstadual);
+		Loja lojaCustomizada = new Loja(nomeLoja,
+				new Endereco(logradouro, numero, complemento, bairro, municipio, estado, cep), telefone, observacao,
+				cnpj, inscricaoEstadual);
 
 		// E atualize o texto esperado abaixo
 		rodarTestarRetorno("" + BREAK, lojaCustomizada);
